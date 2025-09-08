@@ -39,6 +39,18 @@ export default {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
+        heritage: {
+          DEFAULT: "hsl(var(--heritage))",
+          foreground: "hsl(var(--heritage-foreground))",
+        },
+        nature: {
+          DEFAULT: "hsl(var(--nature))",
+          foreground: "hsl(var(--nature-foreground))",
+        },
+        cultural: {
+          DEFAULT: "hsl(var(--cultural))",
+          foreground: "hsl(var(--cultural-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -57,6 +69,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        "gradient-hero": "var(--gradient-hero)",
+        "gradient-cultural": "var(--gradient-cultural)",
+        "gradient-nature": "var(--gradient-nature)",
+        "gradient-heritage": "var(--gradient-heritage)",
+        "gradient-subtle": "var(--gradient-subtle)",
+      },
+      boxShadow: {
+        "soft": "var(--shadow-soft)",
+        "medium": "var(--shadow-medium)",
+        "strong": "var(--shadow-strong)",
+        "glow": "var(--shadow-glow)",
+      },
+      transitionTimingFunction: {
+        "smooth": "var(--transition-smooth)",
+        "spring": "var(--transition-spring)",
       },
       borderRadius: {
         lg: "var(--radius)",

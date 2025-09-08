@@ -9,12 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft hover:shadow-medium transition-smooth",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-soft hover:shadow-medium transition-smooth",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground shadow-soft hover:shadow-medium transition-smooth",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-soft hover:shadow-medium transition-smooth",
+        ghost: "hover:bg-accent hover:text-accent-foreground transition-smooth",
+        link: "text-primary underline-offset-4 hover:underline transition-smooth",
+        hero: "bg-gradient-hero text-white border-0 shadow-glow hover:shadow-strong transition-spring hover:scale-105",
+        heritage: "bg-heritage text-heritage-foreground hover:bg-heritage/90 shadow-soft hover:shadow-medium transition-smooth",
+        nature: "bg-nature text-nature-foreground hover:bg-nature/90 shadow-soft hover:shadow-medium transition-smooth",
+        cultural: "bg-cultural text-cultural-foreground hover:bg-cultural/90 shadow-soft hover:shadow-medium transition-smooth",
+        accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-soft hover:shadow-medium transition-smooth",
       },
       size: {
         default: "h-10 px-4 py-2",
