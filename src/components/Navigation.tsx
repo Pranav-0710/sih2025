@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Menu, X } from "lucide-react";
+import { MapPin, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 shadow-soft">
@@ -25,24 +29,56 @@ const Navigation = () => {
             <a href="#home" className="text-foreground hover:text-primary transition-smooth">
               Home
             </a>
-            <a href="#heritage" className="text-foreground hover:text-primary transition-smooth">
+            <button 
+              onClick={() => navigate('/heritage')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
               Heritage
-            </a>
-            <a href="#trips" className="text-foreground hover:text-primary transition-smooth">
+            </button>
+            <button 
+              onClick={() => navigate('/trip-genie')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
               Trip Genie
-            </a>
-            <a href="#community" className="text-foreground hover:text-primary transition-smooth">
+            </button>
+            <button 
+              onClick={() => navigate('/community')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
               Community
-            </a>
-            <a href="#emergency" className="text-foreground hover:text-primary transition-smooth">
+            </button>
+            <button 
+              onClick={() => navigate('/bookings')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
+              Bookings
+            </button>
+            <button 
+              onClick={() => navigate('/emergency')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
               Emergency
-            </a>
+            </button>
           </div>
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="heritage">Get Started</Button>
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-muted-foreground">
+                  Welcome, {user.user_metadata?.full_name || user.email}
+                </span>
+                <Button variant="ghost" onClick={signOut} size="sm">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Button variant="ghost" onClick={() => navigate('/auth')}>Sign In</Button>
+                <Button variant="heritage" onClick={() => navigate('/auth')}>Get Started</Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -68,42 +104,92 @@ const Navigation = () => {
               >
                 Home
               </a>
-              <a
-                href="#heritage"
-                className="block px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
-                onClick={() => setIsMenuOpen(false)}
+              <button
+                onClick={() => {
+                  navigate('/heritage');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Heritage
-              </a>
-              <a
-                href="#trips"
-                className="block px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/trip-genie');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Trip Genie
-              </a>
-              <a
-                href="#community"
-                className="block px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/community');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Community
-              </a>
-              <a
-                href="#emergency"
-                className="block px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
-                onClick={() => setIsMenuOpen(false)}
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/bookings');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
+              >
+                Bookings
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/emergency');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Emergency
-              </a>
+              </button>
               <div className="border-t border-border pt-4 pb-3">
                 <div className="flex flex-col space-y-2">
-                  <Button variant="ghost" onClick={() => setIsMenuOpen(false)}>
-                    Sign In
-                  </Button>
-                  <Button variant="heritage" onClick={() => setIsMenuOpen(false)}>
-                    Get Started
-                  </Button>
+                  {user ? (
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground px-3">
+                        {user.user_metadata?.full_name || user.email}
+                      </p>
+                      <Button 
+                        variant="ghost" 
+                        onClick={() => {
+                          signOut();
+                          setIsMenuOpen(false);
+                        }}
+                        className="w-full justify-start"
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <Button 
+                        variant="ghost" 
+                        onClick={() => {
+                          navigate('/auth');
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        Sign In
+                      </Button>
+                      <Button 
+                        variant="heritage" 
+                        onClick={() => {
+                          navigate('/auth');
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        Get Started
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
