@@ -14,7 +14,10 @@ const Navigation = () => {
       <div className="container mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center space-x-2 hover:opacity-80 transition-smooth"
+          >
             <div className="bg-gradient-hero p-2 rounded-lg shadow-soft">
               <MapPin className="h-6 w-6 text-white" />
             </div>
@@ -22,7 +25,7 @@ const Navigation = () => {
               <h1 className="text-lg font-bold text-foreground">Smart Tourism</h1>
               <p className="text-xs text-muted-foreground">Jharkhand</p>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
