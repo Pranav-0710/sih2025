@@ -11,6 +11,7 @@ import Heritage from "./pages/Heritage";
 import Community from "./pages/Community";
 import Bookings from "./pages/Bookings";
 import Emergency from "./pages/Emergency";
+import SentimentAnalysis from "./pages/SentimentAnalysis";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/community" element={<Community />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/emergency" element={<Emergency />} />
+            <Route path="/sentiment-analysis" element={<SentimentAnalysis />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
