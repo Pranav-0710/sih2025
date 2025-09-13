@@ -63,7 +63,8 @@ serve(async (req) => {
   }
 
   try {
-    const { type, batchAnalysis } = await req.json();
+    const requestBody = await req.json();
+    const { type, batchAnalysis, text } = requestBody;
 
     if (batchAnalysis) {
       // Analyze all reviews and community posts
@@ -168,8 +169,6 @@ serve(async (req) => {
       });
     } else {
       // Single text analysis
-      const { text } = await req.json();
-      
       if (!text || text.trim().length === 0) {
         throw new Error('Text is required for analysis');
       }
