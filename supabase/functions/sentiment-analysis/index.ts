@@ -21,6 +21,10 @@ interface SentimentResult {
 }
 
 async function analyzeSentiment(text: string): Promise<SentimentResult> {
+  if (!openAIApiKey) {
+    throw new Error('OpenAI API key is not configured');
+  }
+
   const systemPrompt = `You are a sentiment analysis expert. Analyze the given text and return a JSON response with the following structure:
 {
   "sentiment": "positive" | "negative" | "neutral",
@@ -31,30 +35,42 @@ async function analyzeSentiment(text: string): Promise<SentimentResult> {
 
 Focus on tourism and travel context. Be precise and accurate.`;
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${openAIApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: 'gpt-5-2025-08-07',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: text }
-      ],
-      max_completion_tokens: 500,
-    }),
-  });
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${openAIApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-5-2025-08-07',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: text }
+        ],
+        max_completion_tokens: 500,
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error(`OpenAI API error: ${response.status}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`OpenAI API error: ${response.status} - ${errorText}`);
+      throw new Error(`OpenAI API error: ${response.status} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      throw new Error('Invalid response from OpenAI API');
+    }
+
+    const result = JSON.parse(data.choices[0].message.content);
+    
+    return result;
+  } catch (error) {
+    console.error('Error in analyzeSentiment:', error);
+    throw error;
   }
-
-  const data = await response.json();
-  const result = JSON.parse(data.choices[0].message.content);
-  
-  return result;
 }
 
 serve(async (req) => {
