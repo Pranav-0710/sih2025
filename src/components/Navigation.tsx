@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Menu, X, LogOut } from "lucide-react";
+import { MapPin, Menu, X, LogOut, Brain } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +64,12 @@ const Navigation = () => {
               className="text-foreground hover:text-primary transition-smooth"
             >
               Emergency
+            </button>
+            <button 
+              onClick={() => navigate('/sentiment-analysis')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
+              Sentiment Analysis
             </button>
           </div>
 
@@ -156,6 +162,15 @@ const Navigation = () => {
                 className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Emergency
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/sentiment-analysis');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
+              >
+                Sentiment Analysis
               </button>
               <div className="border-t border-border pt-4 pb-3">
                 <div className="flex flex-col space-y-2">
