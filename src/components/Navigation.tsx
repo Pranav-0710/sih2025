@@ -71,6 +71,18 @@ const Navigation = () => {
             >
               Sentiment Analysis
             </button>
+            <button 
+              onClick={() => navigate('/dashboard')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
+              Dashboard
+            </button>
+            <button 
+              onClick={() => navigate('/ar-vr-experience')}
+              className="text-foreground hover:text-primary transition-smooth"
+            >
+              AR/VR Experience
+            </button>
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -171,6 +183,24 @@ const Navigation = () => {
                 className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
               >
                 Sentiment Analysis
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/dashboard');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/ar-vr-experience');
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 text-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-smooth"
+              >
+                AR/VR Experience
               </button>
               <div className="border-t border-border pt-4 pb-3">
                 <div className="flex flex-col space-y-2">

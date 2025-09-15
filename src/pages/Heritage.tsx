@@ -8,6 +8,8 @@ import { MapPin, Clock, IndianRupee, Search, Filter, Star } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import Navigation from '@/components/Navigation';
 import { useToast } from '@/hooks/use-toast';
+import BetlaNationalPark from '@/assets/betla_national_park.jpg';
+import BaidyanathTemple from '@/assets/baidyanath_temple.jpg';
 
 interface HeritageSite {
   id: string;
@@ -24,6 +26,11 @@ interface HeritageSite {
   audio_story_url?: string;
   virtual_tour_url?: string;
 }
+
+const imageMapping: { [key: string]: string } = {
+  "Betla National Park": BetlaNationalPark,
+  "Baidyanath Temple": BaidyanathTemple,
+};
 
 const Heritage = () => {
   const [sites, setSites] = useState<HeritageSite[]>([]);
@@ -154,9 +161,13 @@ const Heritage = () => {
           {filteredSites.map((site) => (
             <Card key={site.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="aspect-video bg-gradient-subtle relative">
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <MapPin className="h-12 w-12 text-white" />
-                </div>
+                {imageMapping[site.name] ? (
+                  <img src={imageMapping[site.name]} alt={site.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <MapPin className="h-12 w-12 text-white" />
+                  </div>
+                )}
                 <Badge className={`absolute top-4 left-4 ${getCategoryColor(site.category)}`}>
                   {site.category}
                 </Badge>
@@ -192,6 +203,14 @@ const Heritage = () => {
                 <div className="flex gap-2">
                   <Button variant="heritage" size="sm" className="flex-1">
                     Learn More
+                  </Button>
+                  {/* Placeholder for AR Feature */}
+                  <Button variant="outline" size="sm" onClick={() => alert('AR feature coming soon!')}>
+                    Launch AR
+                  </Button>
+                  {/* Placeholder for VR Feature */}
+                  <Button variant="outline" size="sm" onClick={() => alert('VR Tour coming soon!')}> 
+                    Start VR Tour
                   </Button>
                   {site.virtual_tour_url && (
                     <Button variant="outline" size="sm">

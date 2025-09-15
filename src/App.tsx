@@ -12,6 +12,8 @@ import Community from "./pages/Community";
 import Bookings from "./pages/Bookings";
 import Emergency from "./pages/Emergency";
 import SentimentAnalysis from "./pages/SentimentAnalysis";
+import Dashboard from "./pages/Dashboard";
+import ArVrExperience from "./pages/ArVrExperience";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/emergency" element={<Emergency />} />
             <Route path="/sentiment-analysis" element={<SentimentAnalysis />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/ar-vr-experience" element={<ArVrExperience />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
